@@ -6,11 +6,13 @@
 /*   By: aichida <aichida@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 21:58:49 by aichida           #+#    #+#             */
-/*   Updated: 2024/06/19 05:42:39 by aichida          ###   ########.fr       */
+/*   Updated: 2024/06/27 13:22:55 by aichida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+// don't forget free
 
 static char	*update_save(int fd, char *buf, char *save)
 {
@@ -40,6 +42,8 @@ static char	*update_save(int fd, char *buf, char *save)
 	return (save);
 }
 
+// temp[0] <- substr
+
 static char	*cut_forward(char *line)
 {
 	int		i;
@@ -62,6 +66,9 @@ static char	*cut_forward(char *line)
 	line[i + 1] = '\0';
 	return (temp);
 }
+
+// a lot of null guard
+// look save as line
 
 char	*get_next_line(int fd)
 {

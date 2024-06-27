@@ -6,11 +6,13 @@
 /*   By: aichida <aichida@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 21:58:57 by aichida           #+#    #+#             */
-/*   Updated: 2024/06/18 21:58:59 by aichida          ###   ########.fr       */
+/*   Updated: 2024/06/27 12:54:40 by aichida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+// const -> can't s++
 
 size_t	ft_strlen(const char *s)
 {
@@ -22,31 +24,25 @@ size_t	ft_strlen(const char *s)
 	return (len);
 }
 
-char	*ft_substr(const char *s, unsigned int start, size_t len)
+// return where c is
+
+char	*ft_strchr(const char *s, int c)
 {
-	size_t	i;
-	size_t	j;
-	char	*temp;
+	int	i;
 
 	i = 0;
-	j = 0;
-	if (!s)
-		return (NULL);
-	temp = malloc(len + 1);
-	if (!temp)
-		return (NULL);
 	while (s[i])
 	{
-		if (i > start - 1 && j <= len - 1)
-		{
-			temp[j] = s[i];
-			j++;
-		}
+		if (s[i] == (char)c)
+			return ((char *)s + i);
 		i++;
 	}
-	temp[j] = '\0';
-	return (temp);
+	if (s[i] == (char)c)
+		return ((char *)s + i);
+	return (NULL);
 }
+
+// duplicate
 
 char	*ft_strdup(const char *s)
 {
@@ -70,23 +66,25 @@ char	*ft_strdup(const char *s)
 		temp[i] = s[i];
 		i++;
 	}
-	temp[i] = 0;
+	temp[i] = '\0';
 	return (temp);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+// null guard
+
+char	*ft_strjoin(const char *s1, const char *s2)
 {
 	int		i;
 	int		j;
 	char	*temp;
 
-	i = 0;
-	j = 0;
 	if (!s1 || !s2)
 		return (NULL);
 	temp = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!temp)
 		return (NULL);
+	i = 0;
+	j = 0;
 	while (s1[j])
 		temp[i++] = s1[j++];
 	j = 0;
@@ -96,20 +94,30 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (temp);
 }
 
-char	*ft_strchr(const char *s, int c)
-{
-	int				i;
-	unsigned char	temp;
+// null guard
 
+char	*ft_substr(const char *s, unsigned int start_index, size_t len)
+{
+	size_t	i;
+	size_t	j;
+	char	*temp;
+
+	if (!s)
+		return (NULL);
+	temp = (char *)malloc(len + 1);
+	if (!temp)
+		return (NULL);
 	i = 0;
-	temp = (unsigned char)c;
+	j = 0;
 	while (s[i])
 	{
-		if (s[i] == temp)
-			return ((char *)s + i);
+		if (i >= start_index && j <= len - 1)
+		{
+			temp[j] = s[i];
+			j++;
+		}
 		i++;
 	}
-	if (s[i] == temp)
-		return ((char *)s + i);
-	return (NULL);
+	temp[j] = '\0';
+	return (temp);
 }
