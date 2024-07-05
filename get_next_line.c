@@ -6,13 +6,13 @@
 /*   By: aichida <aichida@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 21:58:49 by aichida           #+#    #+#             */
-/*   Updated: 2024/06/27 13:22:55 by aichida          ###   ########.fr       */
+/*   Updated: 2024/07/06 02:27:11 by aichida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-// don't forget free
+// strjoin -> free
 
 static char	*update_save(int fd, char *buf, char *save)
 {
@@ -42,7 +42,7 @@ static char	*update_save(int fd, char *buf, char *save)
 	return (save);
 }
 
-// temp[0] <- substr
+// temp[0] == '\0' -> return NULL
 
 static char	*cut_forward(char *line)
 {
@@ -67,8 +67,8 @@ static char	*cut_forward(char *line)
 	return (temp);
 }
 
-// a lot of null guard
-// look save as line
+// append save -> look save as line -> modify save
+// clean buf
 
 char	*get_next_line(int fd)
 {
@@ -98,58 +98,26 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-/* main function
+// #include <fcntl.h>
+// #include <stdio.h>
 
-#include <fcntl.h>
-#include <stdio.h>
+// int	main(void)
+// {
+// 	int		fd;
+// 	char	*line;
 
-int	main(void)
-{
-	int		fd;
-	char	*line;
-
-	line = "";
-	fd = open("test.txt",O_RDOONLY);
-	while(line)
-	{
-		line = get_next_line(fd);
-		printf("%s",line);
-		free(line);
-	}
-	return (0);
-}
-
-*/
-
-/* test example
-
-aaa\nbbb\nccc\n
-aaabbbccc
-
-a
-a\n
-
-xxxxxxxxxxxxxxxxxxxxxxxxxx
-xxxxxxxxxxxxxxxxxxxxxxxxxx\n
-
-\0
-\n
-
-*/
-
-/* test2 example
-hih3h9h3f
-	uh3   3f3o
-	wo3
-
-3i3o38er3
-
-	jbuebc
-	ee
-	e
-
-	op3
-
-	z@z@dp@//36 s
-
-*/
+// 	line = "";
+// 	fd = open("test.txt", O_RDONLY);
+// 	while (1)
+// 	{
+// 		line = get_next_line(fd);
+// 		if (!line)
+// 		{
+// 			free(line);
+// 			break ;
+// 		}
+// 		printf("%s", line);
+// 		free(line);
+// 	}
+// 	return (0);
+// }

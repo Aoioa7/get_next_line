@@ -6,7 +6,7 @@
 /*   By: aichida <aichida@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 21:58:57 by aichida           #+#    #+#             */
-/*   Updated: 2024/06/27 12:54:40 by aichida          ###   ########.fr       */
+/*   Updated: 2024/07/06 02:27:09 by aichida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ char	*ft_strchr(const char *s, int c)
 		return ((char *)s + i);
 	return (NULL);
 }
-
-// duplicate
 
 char	*ft_strdup(const char *s)
 {
@@ -93,8 +91,6 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	temp[i] = '\0';
 	return (temp);
 }
-
-// null guard
 
 char	*ft_substr(const char *s, unsigned int start_index, size_t len)
 {

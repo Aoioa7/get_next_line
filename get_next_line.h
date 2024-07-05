@@ -6,12 +6,9 @@
 /*   By: aichida <aichida@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 21:59:06 by aichida           #+#    #+#             */
-/*   Updated: 2024/06/27 12:44:01 by aichida          ###   ########.fr       */
+/*   Updated: 2024/07/06 02:27:12 by aichida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// open, read, malloc, free, NULL
-// bufsize -> 5. 50, 500, 5000
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
@@ -20,7 +17,7 @@
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 50
+#  define BUFFER_SIZE 500
 # endif
 
 char	*get_next_line(int fd);
